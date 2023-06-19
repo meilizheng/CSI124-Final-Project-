@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:CSI124_Final_Project_"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Canvas Background="#FFF7C6C6">
+        <Label x:Name="lbEmail" Content="Email" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="65" RenderTransformOrigin="0.577,-10.248" Canvas.Left="45" Canvas.Top="54"/>
+        <TextBox x:Name="textEmail" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Center" Width="145" Canvas.Left="125" Canvas.Top="54"/>
+        <Label x:Name="lbPassword" Content="Password" Height="40" Canvas.Left="45" Canvas.Top="131" Width="65" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextPassword" Height="40" Canvas.Left="125" TextWrapping="Wrap" Canvas.Top="131" Width="145" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="btnLogin" Content="Login" Height="40" Canvas.Left="45" Canvas.Top="274" Width="225" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnLogin_Click"/>
+        <ListBox x:Name="lbDebug" Height="245" Canvas.Left="400" Canvas.Top="54" Width="340" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="lbDebug_SelectionChanged"/>
 
-    </Grid>
+    </Canvas>
 </Window>

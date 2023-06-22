@@ -25,53 +25,51 @@ namespace CSI124_Final_Project_
     public partial class MainWindow : Window
     {
 
-        List<Account> _members = new List<Account>();
+        List<UserAccount> _members = new List<UserAccount>();
         public MainWindow()
         {
             InitializeComponent();
-            Preload();
-            lbDebug.ItemsSource = _members;   
+            _members = Data.Accounts;
+            //lbDebug.ItemsSource = Data.Accounts;   
         }
 
-        public void Preload()
-        {
-            _members.Add(new Account("Meili", "Zheng", "meilizheng@gmail.com", "meili"));
-            _members.Add(new Account("Belle", "Miao", "bellemaio@gmail.com", "belle"));
-        }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string email = textEmail.Text;
+            string name = txtName.Text;
             string password = TextPassword.Text;
 
-            if(IsValidUser(email, password))
-            {
-                new Workout().Show();
+
+            if (IsValidUser(name, password))          //if user name and password is valid login in to user and admin 
+            {            
+
+                if (Data._currentAccount.UserRole == UserRole.Admin)
+                {
+                    new Admin().Show();             //if user role is admin open admin interface
+                }
+                else if (Data._currentAccount.UserRole == UserRole.User)
+                {
+                    new User().Show();  //if user role is user open user interface
+                }
             }
             else
             {
-                MessageBox.Show("Please entered a valid information");
+                MessageBox.Show("Please enter valid information.");
             }
         }
 
 
-        public bool IsValidUser(string email, string password)
+        public bool IsValidUser(string name, string password)    
         {
             foreach (var account in _members)
             {
-                if(email == account.Email && password == account.Password)
+                if(name == account.UserName && password == account.Password)
                 {
+                    Data._currentAccount = account;
                     return true;
                 }
             }
             return false;
-        }
-
-        private void lbDebug_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Account selected = (Account)lbDebug.SelectedItem;
-            textEmail.Text = selected.Email;
-            TextPassword.Text = selected?.Password;
         }
     }
 }
